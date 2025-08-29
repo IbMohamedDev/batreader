@@ -1,35 +1,112 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { useAuthStore } from '../store/auth.js';
+import './App.css';
+import Hero from './hero';
+import NavBar from './NavBar';
+import Dashboard from './Dashboard';
+import Sidebar from './Sidebar.jsx';
+import Editor from './Editor.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { user, isAuthenticated, initializeAuth } = useAuthStore();
+  
+
+  const [currentView, setCurrentView] = useState('dashboard'); 
+  
+
+  const [editorConfig, setEditorConfig] = useState({
+    notebookId: null,
+    noteId: null,
+    noteData: null,
+  });
+
+
+  const [flashcards, setFlashcards] = useState([]);
+  const [quizzes, setQuizzes] = useState([]);
+
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
+
+
+  const handleStudyMaterialGenerated = (type, studyMaterial) => {
+    if (type === 'flashcards') {
+      setFlashcards(prev => [studyMaterial, ...prev]);
+    } else if (type === 'quiz') {
+      setQuizzes(prev => [studyMaterial, ...prev]);
+    }
+  };
+
+
+  const handleOpenEditor = (notebookId) => {
+    setEditorConfig({
+      notebookId,
+      noteId: null, 
+      noteData: null,
+    });
+    setCurrentView('editor');
+  };
+
+ 
+  const handleOpenNote = (noteId, notebookId, noteData = null) => {
+    setEditorConfig({
+      notebookId,
+      noteId,
+      noteData,
+    });
+    setCurrentView('editor');
+  };
+
+  
+  const handleGoHome = () => {
+    setCurrentView('dashboard');
+
+    setEditorConfig({
+      notebookId: null,
+      noteId: null,
+      noteData: null,
+    });
+  };
+
+  if (isAuthenticated && user) {
+    return (
+      <div className="flex"> 
+        <Sidebar 
+          onOpenEditor={handleOpenEditor}
+          onOpenNote={handleOpenNote}
+          onGoHome={handleGoHome}
+          flashcards={flashcards}
+          quizzes={quizzes}
+          onStudyMaterialGenerated={handleStudyMaterialGenerated}
+        />
+        
+        <main className="flex-1 ml-64"> 
+       
+          {currentView === 'editor' ? (
+            <Editor 
+             
+              key={editorConfig.noteId || 'new-note'}
+              notebookId={editorConfig.notebookId}
+              noteId={editorConfig.noteId}
+              noteData={editorConfig.noteData}
+              onClose={handleGoHome} 
+              onStudyMaterialGenerated={handleStudyMaterialGenerated}
+            />
+          ) : (
+            <Dashboard />
+          )}
+        </main>
+      </div>
+    );
+  }
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NavBar />
+      <Hero />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

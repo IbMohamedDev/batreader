@@ -1,7 +1,50 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
+// export default defineConfig({
+//   plugins: [
+//     react(),
+//      tailwindcss()
+//   ],
+// })
+
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(),tailwindcss()],
+  
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['pdfjs-dist']
+  },
+  
+  // Configure build
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          pdfjs: ['pdfjs-dist']
+        }
+      }
+    }
+  },
+  
+  // Configure server for development
+  server: {
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: ['..']
+    }
+  },
+  
+  // Define global variables if needed
+  define: {
+    global: 'globalThis',
+  },
+  
+  // Handle worker files
+  worker: {
+    format: 'es'
+  }
 })

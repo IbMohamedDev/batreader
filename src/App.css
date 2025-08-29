@@ -1,42 +1,188 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "tailwindcss";
+
+
+
+
+.editor-content .ProseMirror {
+  outline: none;
+  min-height: 500px;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.editor-content .ProseMirror h1 {
+  font-size: 1.875rem; 
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 2rem 0 1rem 0;
+  color: #1f2937;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.editor-content .ProseMirror h2 {
+  font-size: 1.5rem; 
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 1.5rem 0 0.75rem 0;
+  color: #1f2937;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.editor-content .ProseMirror h3 {
+  font-size: 1.25rem; 
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 1.25rem 0 0.5rem 0;
+  color: #1f2937;
 }
 
-.card {
-  padding: 2em;
+
+.editor-content .ProseMirror p {
+  margin: 0.75rem 0;
+  line-height: 1.6;
+  color: #374151;
 }
 
-.read-the-docs {
-  color: #888;
+
+.editor-content .ProseMirror ul, 
+.editor-content .ProseMirror ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.editor-content .ProseMirror ul {
+  list-style-type: disc;
+}
+
+.editor-content .ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.editor-content .ProseMirror li {
+  margin: 0.25rem 0;
+  color: #374151;
+  display: list-item;
+}
+
+
+.editor-content .ProseMirror ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+
+.editor-content .ProseMirror ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+}
+
+.editor-content .ProseMirror ul[data-type="taskList"] li label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
+}
+
+.editor-content .ProseMirror ul[data-type="taskList"] li > div {
+  flex: 1;
+}
+
+
+.editor-content .ProseMirror blockquote {
+  border-left: 3px solid #d1d5db;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  font-style: italic;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+
+.editor-content .ProseMirror pre {
+  background: #1f2937;
+  border-radius: 0.5rem;
+  color: #f9fafb;
+  font-family: 'JetBrains Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  position: relative;
+}
+
+
+.editor-content .ProseMirror pre .hljs-keyword {
+  color: #c792ea;
+}
+
+.editor-content .ProseMirror pre .hljs-string {
+  color: #a3e635;
+}
+
+.editor-content .ProseMirror pre .hljs-number {
+  color: #f78c6c;
+}
+
+.editor-content .ProseMirror pre .hljs-comment {
+  color: #546e7a;
+  font-style: italic;
+}
+
+.editor-content .ProseMirror pre .hljs-function {
+  color: #82aaff;
+}
+
+.editor-content .ProseMirror pre .hljs-variable {
+  color: #eeffff;
+}
+
+.editor-content .ProseMirror pre .hljs-tag {
+  color: #f07178;
+}
+
+.editor-content .ProseMirror pre .hljs-attr {
+  color: #c792ea;
+}
+
+.editor-content .ProseMirror pre .hljs-built_in {
+  color: #ffcb6b;
+}
+
+.editor-content .ProseMirror pre .hljs-literal {
+  color: #ff5370;
+}
+
+
+.editor-content .ProseMirror code {
+  background-color: #f3f4f6;
+  border-radius: 0.25rem;
+  color: #1f2937;
+  font-size: 0.875rem;
+  padding: 0.125rem 0.25rem;
+  font-family: 'JetBrains Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
+.editor-content .ProseMirror pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+
+.editor-content .ProseMirror strong {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.editor-content .ProseMirror em {
+  font-style: italic;
+}
+
+.editor-content .ProseMirror u {
+  text-decoration: underline;
+}
+
+
+.editor-content .ProseMirror :first-child {
+  margin-top: 0;
+}
+
+.editor-content .ProseMirror :last-child {
+  margin-bottom: 0;
 }
